@@ -21,7 +21,7 @@ apply plugin: 'io.spring.dependency-management'
 group 'com.study.book'
 version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
 
-sourceCompatibility = 1.8
+sourceCompatibility = 11
 repositories {
     mavenCentral()
     jcenter()
@@ -29,9 +29,12 @@ repositories {
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
-    testImplementation('org.springframework.boot:spring-boot-starter-test')
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    testImplementation ('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 }
 
-test {
-    useJUnitPlatform()
-}
