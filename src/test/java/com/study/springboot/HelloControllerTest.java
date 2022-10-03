@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest
+@WebMvcTest //JPA 기능이 작동하지 않음 그 이유는 컨트롤러나 서비스 같은 경우 외부 연동과 관련된 부분이기 때문.
 public class HelloControllerTest {
     @Autowired
     private MockMvc mvc;
