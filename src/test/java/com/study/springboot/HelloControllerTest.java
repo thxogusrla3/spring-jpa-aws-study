@@ -1,10 +1,15 @@
 package com.study.springboot;
 
+import com.study.springboot.config.auth.SecurityConfig;
 import com.study.springboot.web.HelloController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.stereotype.Controller;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -13,12 +18,16 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest //JPA 기능이 작동하지 않음 그 이유는 컨트롤러나 서비스 같은 경우 외부 연동과 관련된 부분이기 때문.
+@WebMvcTest(controllers = HelloController.class, excludeFilters = {
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)
+    }
+) //JPA 기능이 작동하지 않음 그 이유는 컨트롤러나 서비스 같은 경우 외부 연동과 관련된 부분이기 때문.
 public class HelloControllerTest {
     @Autowired
     private MockMvc mvc;
 
     @Test
+    @WithMockUser(roles = "USER")
     public void Hello_return() throws Exception {
         String hello = "hello";
 
@@ -28,6 +37,7 @@ public class HelloControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "USER")
     public void helloDto_return() throws Exception {
         String name = "hello";
         int amount = 1000;

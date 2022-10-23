@@ -18,7 +18,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
-group 'com.study.book'
+group 'com.study.springboot'
 version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
 
 sourceCompatibility = 11
@@ -33,6 +33,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mustache'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'com.h2database:h2'
+    implementation 'org.springframework.session:spring-session-jdbc'
 
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
@@ -40,5 +41,6 @@ dependencies {
     testImplementation ('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testImplementation ("org.springframework.security:spring-security-test")
 }
 
