@@ -18,9 +18,9 @@ before_install:
   - chmod +x gradlew
   -
 before_deploy:
-  - zip -r freelec-springboo2-webservice *
+  - zip -r spring-jpa-aws-study *
   - mkdir -p deploy
-  - mv freelec-springboot2-webservice.zip deploy/freelec-springboot2-webservice.zip
+  - mv spring-jpa-aws-study.zip deploy/spring-jpa-aws-study.zip
 
 deploy:
     - provider: s3
